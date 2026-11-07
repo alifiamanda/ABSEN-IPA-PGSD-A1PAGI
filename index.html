@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi PGSD A1 PAGI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">📚</div>
+            <div>
+                <h1>ABSENSI MAHASISWA</h1>
+                <p>PGSD A1 PAGI · ILMU PENGETAHUAN ALAM</p>
+            </div>
+        </div>
+        <span class="semester">TAHUN AKADEMIK 2026</span>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <div>
+                <span class="eyebrow">SISTEM INFORMASI AKADEMIK</span>
+                <h2>Selamat Datang 👋</h2>
+                <p>Kelola absensi dan nilai mahasiswa dengan mudah.</p>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-icon blue">👩‍🎓</div>
+                <div>
+                    <p>Total Mahasiswa</p>
+                    <h2 id="totalStudents">32</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">📅</div>
+                <div>
+                    <p>Total Pertemuan</p>
+                    <h2 id="totalMeetings">1</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <div>
+                    <p>Hadir Pertemuan Ini</p>
+                    <h2 id="presentCount">0</h2>
+                </div>
+            </div>
+        </section>
+
+        <nav class="navigation">
+            <button class="nav-btn active" data-view="attendanceView">
+                📋 Absensi
+            </button>
+            <button class="nav-btn" data-view="gradesView">
+                📝 Data Nilai
+            </button>
+            <button class="nav-btn" data-view="recapView">
+                📊 Rekap Kehadiran
+            </button>
+        </nav>
+
+        <!-- HALAMAN ABSENSI -->
+        <section id="attendanceView" class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Daftar Kehadiran Mahasiswa</h2>
+                    <p>Pilih status kehadiran setiap mahasiswa.</p>
+                </div>
+                <div class="meeting-actions">
+                    <button class="btn btn-primary" id="addMeetingBtn">
+                        + Tambah Pertemuan
+                    </button>
+                    <button class="btn btn-danger" id="deleteMeetingBtn">
+                        Hapus Pertemuan
+                    </button>
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <div class="field">
+                    <label for="meetingSelect">Pilih Pertemuan</label>
+                    <select id="meetingSelect"></select>
+                </div>
+
+                <div class="field search-field">
+                    <label for="attendanceSearch">Cari Mahasiswa</label>
+                    <input
+                        type="text"
+                        id="attendanceSearch"
+                        placeholder="Cari nama atau NPM..."
+                    >
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NPM</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>Status Kehadiran</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- HALAMAN NILAI -->
+        <section id="gradesView" class="content-card hidden">
+            <div class="section-heading">
+                <div>
+                    <h2>Data Nilai Mahasiswa</h2>
+                    <p>Masukkan nilai mahasiswa pada kolom yang tersedia.</p>
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <div class="field search-field">
+                    <label for="gradeSearch">Cari Mahasiswa</label>
+                    <input
+                        type="text"
+                        id="gradeSearch"
+                        placeholder="Cari nama atau NPM..."
+                    >
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NPM</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>Individu</th>
+                            <th>Kelompok</th>
+                            <th>UTS</th>
+                            <th>UAS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gradesBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- HALAMAN REKAP -->
+        <section id="recapView" class="content-card hidden">
+            <div class="section-heading">
+                <div>
+                    <h2>Rekap Kehadiran</h2>
+                    <p>Ringkasan kehadiran seluruh mahasiswa.</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NPM</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>Hadir</th>
+                            <th>Izin</th>
+                            <th>Sakit</th>
+                            <th>Alpa</th>
+                            <th>Persentase</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recapBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="data-actions">
+            <div>
+                <h3>Kelola Data Absensi</h3>
+                <p>Unduh atau masukkan kembali data absensi.</p>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-outline" id="exportBtn">
+                    ↓ Ekspor Data
+                </button>
+
+                <label class="btn btn-outline import-label" for="importFile">
+                    ↑ Impor Data
+                </label>
+                <input type="file" id="importFile" accept=".json" hidden>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Absensi PGSD A1 PAGI · Ilmu Pengetahuan Alam</p>
+        </footer>
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
